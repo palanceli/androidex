@@ -1,0 +1,61 @@
+{
+	"folders":
+	[
+		{
+			"name" : "libs/binder",
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", ".tags*",
+
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/native/libs/binder"
+		},
+		{
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", ".tags*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/native/cmds/servicemanager"
+		},
+		{
+			"name" : "include/binder",
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", ".tags*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/native/include/binder"
+		},
+		{
+			"name" : "kernel-headers",
+			"folder_exclude_patterns":
+			[
+				"*",
+			],
+			"file_include_patterns":
+			[
+				"binder.h",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/external/kernel-headers/original/uapi/linux"
+		},
+		{
+			"name" : "testservice", 
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", "*.tags*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/androidex/external-testservice"
+		},
+		{
+			"name" : "goldfish/binder", 
+			"file_include_patterns":
+			[
+				"binder.*",
+			],
+			"folder_exclude_patterns":
+			[
+				"*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/kernel/goldfish/drivers/staging/android/"
+		}
+	]
+}

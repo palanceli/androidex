@@ -1,0 +1,6 @@
+config FREG
+	tristate "Fake Register Driver"
+	default n
+	help
+	This is the freg driver for android system.
+	

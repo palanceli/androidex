@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"*.o",
+				"*.map"
+			],
+			"folder_exclude_patterns":
+			[
+				"prebuilts",
+				".repo",
+				"docs",
+				"out"
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11"
+		},
+		{
+			"path": "/Volumes/android-6.0.1_r11g/androidex"
+		}
+	]
+}

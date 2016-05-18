@@ -1,0 +1,1 @@
+cmd_drivers/freg/freg.ko := arm-eabi-ld -EL -r  -T /Volumes/android-6.0.1_r11g/android-6.0.1_r11/kernel/goldfish/scripts/module-common.lds --build-id  -o drivers/freg/freg.ko drivers/freg/freg.o drivers/freg/freg.mod.o
