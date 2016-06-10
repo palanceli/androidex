@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Volumes/android-6.0.1_r11g/androidex",
+			
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", "*.tags*"
+			],
+		}
+	]
+}
