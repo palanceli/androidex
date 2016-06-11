@@ -1,6 +1,6 @@
 #ifndef RS_STRONG_POINTER_H
 #define RS_STRONG_POINTER_H
-
+#include "logger.h"
 template<typename T> class wp;
 
 // ---------------------------------------------------------------------------
@@ -38,16 +38,19 @@ public:
 
     sp(T* other): m_ptr(other)
     {
+        Logging("sp::sp(T*)");
         if (other) other->incStrong(this);
     }
 
     sp(const sp<T>& other): m_ptr(other.m_ptr)
     {
+        Logging("sp::sp(const sp<T>&)");
         if (m_ptr) m_ptr->incStrong(this);
     }
 
     ~sp()
     {
+        Logging("sp::~sp()");
         if (m_ptr) m_ptr->decStrong(this);
     }
 
@@ -60,9 +63,21 @@ public:
 
     // Accessors
 
-    inline  T&      operator* () const  { return *m_ptr; }
-    inline  T*      operator-> () const { return m_ptr;  }
-    inline  T*      get() const         { return m_ptr; }
+    inline  T&      operator* () const  
+    { 
+        Logging("sp::operator*()");
+        return *m_ptr; 
+    }
+    inline  T*      operator-> () const 
+    {
+        Logging("sp::operator->()"); 
+        return m_ptr;  
+    }
+    inline  T*      get() const         
+    { 
+        Logging("sp::get()");
+        return m_ptr; 
+    }
 
     // Operators
 
@@ -86,6 +101,7 @@ private:
 // No user serviceable parts below here.
 template<typename T> sp<T>& sp<T>::operator = (const sp<T>& other) 
 {
+    Logging("sp::operator = (const sp<T>& other)");
     T* otherPtr(other.m_ptr);
     if (otherPtr) otherPtr->incStrong(this);
     if (m_ptr) m_ptr->decStrong(this);
@@ -95,6 +111,7 @@ template<typename T> sp<T>& sp<T>::operator = (const sp<T>& other)
 
 template<typename T> sp<T>& sp<T>::operator = (T* other)
 {
+    Logging("sp::operator = (T* other)");
     if (other) other->incStrong(this);
     if (m_ptr) m_ptr->decStrong(this);
     m_ptr = other;
@@ -103,6 +120,7 @@ template<typename T> sp<T>& sp<T>::operator = (T* other)
 
 template<typename T> void sp<T>::clear()
 {
+    Logging("sp::clear()");
     if (m_ptr) {
         m_ptr->decStrong(this);
         m_ptr = 0;
@@ -111,6 +129,7 @@ template<typename T> void sp<T>::clear()
 
 template<typename T> void sp<T>::set_pointer(T* ptr) 
 {
+    Logging("sp::set_pointer(T* ptr)");
     m_ptr = ptr;
 }
 

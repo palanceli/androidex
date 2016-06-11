@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include "RefBase.h"
-#include <string.h>
 #include "logger.h"
 
 class LightClass : public LightRefBase <LightClass>
 {
 public:
-	LightClass(){Logging("Construct LightClass Object.");}
-	~LightClass(){Logging("Destroy LightClass Object.");}
+	LightClass(){}
+	~LightClass(){}
 };
 
 int testlightptr(int argc, char const * argv[])
