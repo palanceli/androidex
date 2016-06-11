@@ -28,7 +28,7 @@ public:
 	    char msg[512] = {0};
 	    vsnprintf(msg, 512, pszFmt, ptr);
 	    va_end(ptr);
-	    printf("%16s:%-4d %s\n", mFileName, mLineNo, msg);
+	    printf("[%s:%d] %s\n", mFileName, mLineNo, msg);
 	}
 
 private:
