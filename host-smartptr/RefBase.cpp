@@ -1,5 +1,6 @@
 #include "RefBase.h"
 #include <stdatomic.h>
+#include "logger.h"
 
 // ---------------------------------------------------------------------------
 
@@ -21,6 +22,7 @@ public:
         , mBase(base)
         , mFlags(0)
     {
+        Logging("RefBase::weakref_impl::weakref_impl(RefBase* base)");
     }
 
     void addStrongRef(const void* /*id*/) { }
@@ -310,10 +312,12 @@ RefBase::weakref_type* RefBase::getWeakRefs() const
 RefBase::RefBase()
     : mRefs(new weakref_impl(this))
 {
+    Logging("RefBase::RefBase()");
 }
 
 RefBase::~RefBase()
 {
+    Logging("RefBase::~RefBase()");
     if (mRefs->mStrong == INITIAL_STRONG_VALUE) {
         // we never acquired a strong (and/or weak) reference on this object.
         delete mRefs;

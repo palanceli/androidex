@@ -16,23 +16,22 @@ struct TESTCASE
 
 
 int testlightptr(int argc, char const * argv[]);
-int testweightptr(int argc, char const * argv[]);
-
-int tc01(int argc, char const *argv[])
+int tc01(int argc, char const *argv[]) // 测试轻量级指针
 {
 	return testlightptr(argc, argv);
 }
 
-int tc02(int argc, char const *argv[])
+int tc02(int argc, char const *argv[]) // 测试《More Effective C++》封装的智能指针
 {
 	meyers::String s1("abc");
 	meyers::String s2("123");
 	return 0;
 }
 
-int tc03(int argc, char const *argv[])
+int testSWPtr(int argc, char const * argv[]); 
+int tc03(int argc, char const *argv[]) // 测试sp转为wp
 {
-	return testweightptr(argc, argv);
+	return testSWPtr(argc, argv);
 }
 
 TESTCASE testsuite[] = {

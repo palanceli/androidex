@@ -5,6 +5,7 @@
 #include <inttypes.h>
 #include <stddef.h>
 #include "StrongPointer.h"
+#include "logger.h"
 
 class ReferenceMover;
 class ReferenceConverterBase {
@@ -166,7 +167,7 @@ class wp
 public:
     typedef typename RefBase::weakref_type weakref_type;
 
-    inline wp() : m_ptr(0) { }
+    inline wp() : m_ptr(0) {Logging("wp::wp()");}
 
     wp(T* other);
     wp(const wp<T>& other);
@@ -254,6 +255,7 @@ template<typename T>
 wp<T>::wp(T* other)
     : m_ptr(other)
 {
+    Logging("wp::wp(T* other)");
     if (other) m_refs = other->createWeak(this);
 }
 
@@ -261,6 +263,7 @@ template<typename T>
 wp<T>::wp(const wp<T>& other)
     : m_ptr(other.m_ptr), m_refs(other.m_refs)
 {
+    Logging("wp::wp(const wp<T>& other)");
     if (m_ptr) m_refs->incWeak(this);
 }
 
@@ -268,6 +271,7 @@ template<typename T>
 wp<T>::wp(const sp<T>& other)
     : m_ptr(other.m_ptr)
 {
+    Logging("wp::wp(const sp<T>& other)");
     if (m_ptr) {
         m_refs = m_ptr->createWeak(this);
     }
@@ -277,6 +281,7 @@ template<typename T> template<typename U>
 wp<T>::wp(U* other)
     : m_ptr(other)
 {
+    Logging("wp::wp(U* other)");
     if (other) m_refs = other->createWeak(this);
 }
 
@@ -284,6 +289,7 @@ template<typename T> template<typename U>
 wp<T>::wp(const wp<U>& other)
     : m_ptr(other.m_ptr)
 {
+    Logging("wp::wp(const wp<U>& other)");
     if (m_ptr) {
         m_refs = other.m_refs;
         m_refs->incWeak(this);
@@ -294,6 +300,7 @@ template<typename T> template<typename U>
 wp<T>::wp(const sp<U>& other)
     : m_ptr(other.m_ptr)
 {
+    Logging("wp::wp(const sp<U>& other)");
     if (m_ptr) {
         m_refs = m_ptr->createWeak(this);
     }
@@ -302,6 +309,7 @@ wp<T>::wp(const sp<U>& other)
 template<typename T>
 wp<T>::~wp()
 {
+    Logging("wp::~wp()");
     if (m_ptr) m_refs->decWeak(this);
 }
 

@@ -14,8 +14,7 @@ void WeightClass::printRefCount()
 {
 	int32_t strong = getStrongCount();
 	weakref_type* ref = getWeakRefs();
-	Logging("Strong Ref Count:%d.\n", (strong == INITIAL_STRONG_VALUE ? 0 :strong));
-	Logging("Weak Ref Count:%d.\n", ref->getWeakCount());
+	Logging("StrongCount=%d. WeakCount=%d.", (strong == INITIAL_STRONG_VALUE ? 0 :strong), ref->getWeakCount());
 }
 
 // ---------------------------------------------------------------------------
@@ -78,6 +77,16 @@ void TestForeverClass(ForeverClass* pForeverClass)
 		sp<ForeverClass> spInner = pForeverClass;
 		pForeverClass->printRefCount();
 	}
+}
+
+int testSWPtr(int argc, char const * argv[])
+{
+	WeightClass* pObj = new WeightClass();
+	sp<WeightClass> spObj(pObj);
+	spObj->printRefCount();
+	wp<WeightClass> wpObj(pObj);
+	spObj->printRefCount();
+	return 0;
 }
 
 int testweightptr(int argc, char const * argv[])
