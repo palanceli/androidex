@@ -55,7 +55,19 @@
 			[
 				"*",
 			],
-			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/kernel/goldfish/drivers/staging/android/"
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/kernel/goldfish/drivers/staging/android/",
+		},
+		{
+			"name" : "mm", 
+			"file_include_patterns":
+			[
+				"vmalloc.*"
+			],
+			"folder_exclude_patterns":
+			[
+				"*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/kernel/goldfish/mm/",
 		}
 	]
 }
