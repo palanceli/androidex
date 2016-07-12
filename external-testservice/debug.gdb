@@ -70,3 +70,13 @@ define 160428a
 	b IPCThreadState.cpp:934
 	c
 end
+
+define binder03a
+	b IPCThreadState.cpp:732
+	b IPCThreadState.cpp:736
+	b IPCThreadState.cpp:740
+	b IPCThreadState.cpp:745
+	b IPCThreadState.cpp:754
+	b IPCThreadState.cpp:787
+	b IPCThreadState.cpp:794
+end
