@@ -1,0 +1,5 @@
+config HA
+  tristate "Hello Android Driver"
+  default n
+  help
+  This is the ha driver for android system.
