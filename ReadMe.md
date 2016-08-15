@@ -1,4 +1,4 @@
-记录学习android过程中的代码。该项目是针对android-6.0.1_r11而做，镜像文件中安卓远吗和androidex并列放，如下：
+记录学习android过程中的代码。该项目是针对android-6.0.1_r11而做，镜像文件中安卓源码和androidex并列放，如下：
 ``` bash
 ├──android-6.0.1_r11           // Android源码
 ├──androidex
