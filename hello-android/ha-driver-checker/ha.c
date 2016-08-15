@@ -14,19 +14,17 @@ int main(int argc, char** argv){
 		return -1;
 	}
 
-	printf("Read original value: \n");
 	read(fd, &value, sizeof(value));
-	printf("%d.\n\n", value);
+	printf("Read original value: %d.\n", value);
 
-	value = 100;
-	printf("Write value %d to %s.\n\n", value, HA_DEVICE_NAME);
+	value += 10;
+	printf("Write value %d to %s.\n", value, HA_DEVICE_NAME);
 	write(fd, &value, sizeof(value));
 
-	printf("Read the value again:\n");
 	read(fd, &value, sizeof(value));
-	printf("%d.\n\n", value);
+	printf("Read the value again:%d.\n", value);
 
 	close(fd);
-	
+
 	return 0;
 }
