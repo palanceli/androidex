@@ -1,1 +1,1 @@
-obj-$(CONFIG_HA) += ha.o
+obj-$(CONFIG_HA) += hello-android.o

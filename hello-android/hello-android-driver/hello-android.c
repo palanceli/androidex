@@ -4,7 +4,7 @@
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
 #include <linux/device.h>
-#include <asm/uassess.h>
+#include <asm/uaccess.h>
 
 #include "hello-android.h"
 
@@ -14,7 +14,7 @@ static int ha_minor = 0;
 
 // 设备类别和设备变量
 static struct class* ha_class = NULL;
-static struct hello-android_dev* ha_dev = NULL;
+static struct hello_android_dev* ha_dev = NULL;
 
 // 传统的设备文件操作方法
 static int ha_open(struct inode* inode, struct file* filp);
@@ -29,29 +29,34 @@ static struct file_operations ha_fops = {
   .release  = ha_release,
   .read   = ha_read,
   .write  = ha_write,
-}
+};
 
 // devfs 文件系统的设备属性操作方法
-static ssize_t ha_val_show(struct device* dev, struct device_attribute* attr, char* buf);
-static ssize_t ha_val_store(struct device* dev, struct device_attribute* attr, const* buf, size_t count);
+static ssize_t ha_value_show(struct device* dev, struct device_attribute* attr, char* buf);
+static ssize_t ha_value_store(struct device* dev, struct device_attribute* attr, const char* buf, size_t count);
 
 // devfs文件系统的设备属性
-static DEVIC_ATTR(value, S_IRUGO | S_IWUSR, ha_val_show, ha_val_store);
+static DEVICE_ATTR(value, S_IRUGO | S_IWUSR, ha_value_show, ha_value_store);
 
 // 打开设备方法
 static int ha_open(struct inode* inode, struct file* filp){
-  struct hello-android_dev* dev;
+  struct hello_android_dev* dev;
 
   // 将自定义设备结构体保存在文件指针的私有数据成员中，以便访问设备是可以直接拿来用
-  dev = container_of(inode->i_cdev, struct hello-android_dev, dev);
+  dev = container_of(inode->i_cdev, struct hello_android_dev, dev);
   filp->private_data = dev;
 
   return 0;
 }
 
-static ssize_t ha_read(struct file* filp, char__user* buf, size_t count, loff_t* f_pos){
+// 设备文件释放时调用
+static int ha_release(struct inode* inode, struct file* filp){
+  return 0;
+}
+
+static ssize_t ha_read(struct file* filp, char __user* buf, size_t count, loff_t* f_pos){
   ssize_t err = 0;
-  struct hello-android_dev* dev = filp->private_data;
+  struct hello_android_dev* dev = filp->private_data;
 
   // 同步访问
   if(down_interruptible(&(dev->sem))){
@@ -75,8 +80,8 @@ out:
 }
 
 // 写设备的寄存器value的值
-static ssize_t ha_write(struct file* filp, const char _user* buf, size_t count, loff_t* f_pos){
-  struct hello-android_dev* dev = filp->private_data;
+static ssize_t ha_write(struct file* filp, const char __user* buf, size_t count, loff_t* f_pos){
+  struct hello_android_dev* dev = filp->private_data;
   ssize_t err = 0;
 
   // 同步访问
@@ -84,12 +89,12 @@ static ssize_t ha_write(struct file* filp, const char _user* buf, size_t count, 
     return -ERESTARTSYS;
   }
 
-  if(count != sizeof(dev->valu)){
+  if(count != sizeof(dev->value)){
     goto out;
   }
 
   // 将用户提供的缓冲区的值写到设备寄存器
-  if(copy_from_user(&(dev_value), buf, count)){
+  if(copy_from_user(&(dev->value), buf, count)){
     err = -EFAULT;
     goto out;
   }
@@ -101,7 +106,7 @@ out:
 }
 
 // 将寄存器value的值读取到缓冲区buf中，内部使用
-static ssize_t __ha_get_value(struct hello-android_dev* dev, char* buf){
+static ssize_t __ha_get_value(struct hello_android_dev* dev, char* buf){
   int value = 0;
   // 同步访问
   if(down_interruptible(&(dev->sem))){
@@ -114,7 +119,7 @@ static ssize_t __ha_get_value(struct hello-android_dev* dev, char* buf){
 }
 
 // 把缓冲区的buf的值写到设备寄存器value中，内部使用
-static ssize_t __ha_set_value(struct hello-android_dev* dev, const char* buf, size_t count){
+static ssize_t __ha_set_value(struct hello_android_dev* dev, const char* buf, size_t count){
   int value = 0;
 
   // 将字符串转换成数字
@@ -133,14 +138,14 @@ static ssize_t __ha_set_value(struct hello-android_dev* dev, const char* buf, si
 
 // 读设备属性value的值
 static ssize_t ha_value_show(struct device* dev, struct device_attribute* attr, char* buf){
-  struct hello-android_dev* hadev = (struct hello-android_dev*)dev_get_drvdata(dev);
+  struct hello_android_dev* hadev = (struct hello_android_dev*)dev_get_drvdata(dev);
 
   return __ha_get_value(hadev, buf);
 }
 
 // 写设备属性value的值
 static ssize_t ha_value_store(struct device* dev, struct device_attribute* attr, const char* buf, size_t count){
-  struct hello-android_dev* hadev = (struct hello-android_dev*)dev_get_drvdata(dev);
+  struct hello_android_dev* hadev = (struct hello_android_dev*)dev_get_drvdata(dev);
 
   return __ha_set_value(hadev, buf, count);
 }
@@ -151,7 +156,7 @@ static ssize_t ha_proc_read(char* page, char** start, off_t off, int count, int*
     *eof = 1;
     return 0;
   }
-  return __ha_get_value(hello-android_dev, page);
+  return __ha_get_value(ha_dev, page);
 }
 
 // 把缓冲区的值buff保存到设备寄存器value
@@ -175,7 +180,7 @@ static ssize_t ha_proc_write(struct file* filp, const char __user* buff, unsigne
     goto out;
   }
 
-  err = __ha_set_value(hello-android_dev, page, len);
+  err = __ha_set_value(ha_dev, page, len);
 
 out:
   free_page((unsigned long)page);
@@ -188,7 +193,7 @@ static void ha_create_proc(void){
 
   entry = create_proc_entry(HA_DEVICE_PROC_NAME, 0, NULL);
   if(entry){
-    entry->owner = THIS_MODULE;
+    //entry->owner = THIS_MODULE;
     entry->read_proc = ha_proc_read;
     entry->write_proc = ha_proc_write;
   }
@@ -200,11 +205,11 @@ static void ha_remove_proc(void){
 }
 
 // 初始化设备
-static int __ha_setup_dev(struct hello-android_dev* dev){
+static int __ha_setup_dev(struct hello_android_dev* dev){
   int err;
-  dev_t devno = MKDEV(hello-android_major, hello-android_minor);
+  dev_t devno = MKDEV(ha_major, ha_minor);
 
-  memset(dev, 0, sizeof(struct hello-android_dev));
+  memset(dev, 0, sizeof(struct hello_android_dev));
 
   // 初始化字符设备
   cdev_init(&(dev->dev), &ha_fops);
@@ -217,7 +222,7 @@ static int __ha_setup_dev(struct hello-android_dev* dev){
   }
 
   // 初始化信号量和寄存器value的值
-  init_MUTEX(&(dev->sem));
+  sema_init(&(dev->sem), 1);
   dev->value = 0;
 
   return 0;
@@ -242,7 +247,7 @@ static int __init ha_init(void){
   ha_minor = MINOR(dev);
 
   // 分配ha设备结构体
-  ha_dev = kmalloc(sizeof(struct hello-android_dev), GFP_KERNEL);
+  ha_dev = kmalloc(sizeof(struct hello_android_dev), GFP_KERNEL);
   if(!ha_dev){
     err = -ENOMEM;
     printk(KERN_ALERT"Failed to alloc freg device.\n");
@@ -318,7 +323,7 @@ static void __exit ha_exit(void){
 
   // 删除字符设备和释放设备内存
   if(ha_dev){
-    cdev_del(&ha_dev->dev));
+    cdev_del(&(ha_dev->dev));
     kfree(ha_dev);
   }
 

@@ -31,3 +31,5 @@
 *.ko
 *.order
 *.tags*
+.*.cmd
+*.mod.c
