@@ -6,7 +6,7 @@
 			
 			"file_exclude_patterns":
 			[
-				"*.o", "*.map", "*.tags*"
+				"*.o", "*.map", "*.tags*", "*.o.cmd", "*.ko,cmd", "*.ko", "*.order", "*.mod.c"
 			],
 		}
 	]
