@@ -32,13 +32,15 @@ static struct hw_module_methods_t ha_module_methods = {
 // 定义模块结构体变量
 struct ha_module_t HAL_MODULE_INFO_SYM = {
 	common: {
-		tag : HARDWARE_MODULE_TAG,
-		version_major: 1,
-		version_minor: 0,
-		id: HA_HARDWARE_MODULE_ID,
-		name: MODULE_NAME,
-		author: MODULE_AUTHOR,
-		methods: &ha_module_methods,
+		tag 			: HARDWARE_MODULE_TAG,
+		version_major	: 1,
+		version_minor	: 0,
+		id 				: HA_HARDWARE_MODULE_ID,
+		name 			: MODULE_NAME,
+		author 			: MODULE_AUTHOR,
+		methods 		: &ha_module_methods,
+		dso 			: NULL,
+		reserved 		: {0},
 	}
 };
 
