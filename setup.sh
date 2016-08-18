@@ -7,3 +7,4 @@
 sh hello-android/hello-android-driver/setup.sh
 sh hello-android/ha-driver-checker/setup.sh
 sh hello-android/hello-android-hal/setup.sh
+sh hello-android/hello-android-service/setup.sh
