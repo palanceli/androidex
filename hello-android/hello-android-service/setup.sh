@@ -8,3 +8,8 @@ if [ ! -L "$scriptPath/../../../android-6.0.1_r11/frameworks/base/services/java/
 	echo "创建软链接 android-6.0.1_r11/frameworks/base/services/java/core/android/server/HAService.java --> $scriptPath/HAService.java"
 	ln -s $scriptPath/HAService.java $scriptPath/../../../android-6.0.1_r11/frameworks/base/services/java/core/android/server/HAService.java
 fi
+
+if [ ! -L "$scriptPath/../../../android-6.0.1_r11/frameworks/base/services/jni/com_android_server_HAService.cpp" ]; then
+	echo "创建软链接 android-6.0.1_r11/frameworks/base/services/jni/com_android_server_HAService.cpp --> $scriptPath/com_android_server_HAService.cpp"
+	ln -s $scriptPath/com_android_server_HAService.cpp $scriptPath/../../../android-6.0.1_r11/frameworks/base/services/jni/com_android_server_HAService.cpp
+fi
