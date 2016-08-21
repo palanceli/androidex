@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.IHAService;
 import android.util.Slog;
 
-public class HAService extends IHAService.stab {
+public class HAService extends IHAService.Stub {
 	private static final String TAG = "HAService";
 	private int mPtr = 0;
 
@@ -20,7 +20,7 @@ public class HAService extends IHAService.stab {
 	public void setValue(int value){
 		if(mPtr == 0){
 			Slog.e(TAG, "HA service is not initialized.");
-			return 0;
+			return;
 		}
 		setValue_native(mPtr, value);
 	}

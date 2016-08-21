@@ -1,4 +1,4 @@
-package palance.li.ha
+package palance.li.ha;
 
 import android.app.Activity;
 import android.os.ServiceManager;
@@ -21,7 +21,7 @@ public class HelloAndroid extends Activity implements OnClickListener {
 	private Button 		clearButton	= null;
 
 	@Override
-	public void onCleate(Bundle savedInstanceState){
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
@@ -50,7 +50,7 @@ public class HelloAndroid extends Activity implements OnClickListener {
 			}catch(RemoteException e){
 				Log.e(LOG_TAG, "Remote Exception while reading value from ha service.");
 			}
-		}else if(v.equals(witeButton)){
+		}else if(v.equals(writeButton)){
 			try{
 				String text = valueText.getText().toString();
 				int value = Integer.parseInt(text);
