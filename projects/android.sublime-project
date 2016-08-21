@@ -4,8 +4,7 @@
 		{
 			"file_exclude_patterns":
 			[
-				"*.o",
-				"*.map"
+				"*.o", "*.map", "*.ko.cmd", "*.o.cmd", "*.ko", "*.order", "*.mod.c"
 			],
 			"folder_exclude_patterns":
 			[
@@ -17,6 +16,10 @@
 			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11"
 		},
 		{
+			"file_exclude_patterns":
+			[
+				"*.o", "*.map", "*.ko.cmd", "*.o.cmd", "*.ko", "*.order", "*.mod.c"
+			],
 			"path": "/Volumes/android-6.0.1_r11g/androidex"
 		}
 	]
