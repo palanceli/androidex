@@ -33,3 +33,4 @@
 *.tags*
 .*.cmd
 *.mod.c
+*.builtin
