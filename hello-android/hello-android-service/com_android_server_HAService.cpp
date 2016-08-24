@@ -53,7 +53,9 @@ namespace android
 		ha_module_t* module;
 		ha_device_t* device;
 
-		ALOGI("Initializing HAL stub ha ...");
+		ALOGI("==== ==== ====Initializing HAL stub ha ...==== ==== ====");
+		ALOGI("==== ==== ====Initializing HAL stub ha ...==== ==== ====");
+		ALOGI("==== ==== ====Initializing HAL stub ha ...==== ==== ====");
 
 		// 加载硬件抽象层模块ha
 		if(hw_get_module(HA_HARDWARE_MODULE_ID, (const struct hw_module_t**)&module) == 0){
@@ -61,7 +63,7 @@ namespace android
 			// 打开虚拟硬件设备ha
 			if(ha_device_open(&(module->common), &device) == 0){
 				ALOGI("Device ha is open.");
-				// 将ha_device_t借口转换为整型值返回
+				// 将ha_device_t接口转换为整型值返回
 				return (jint)device;
 			}
 			ALOGE("Failed to open device ha.");
@@ -80,7 +82,7 @@ namespace android
 
 	// 注册Java本地接口方法
 	int register_android_server_HAService(JNIEnv* env){
-		return jniRegisterNativeMethods(env, "com/android/server/HaService", 
+		return jniRegisterNativeMethods(env, "com/android/server/HAService", 
 			method_table, NELEM(method_table));
 	}
 };

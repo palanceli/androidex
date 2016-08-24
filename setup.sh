@@ -14,7 +14,7 @@
 #sh hello-android/hello-android-app/setup.sh $*
 
 python hello-android/hello-android-driver/setup.py $*
-python hello-android/hello-android-checker/setup.py $*
+python hello-android/ha-driver-checker/setup.py $*
 python hello-android/hello-android-hal/setup.py $*
 python hello-android/hello-android-service/setup.py $*
-python hello-android/hello-android-app/setup.py $*
+#python hello-android/hello-android-app/setup.py $*

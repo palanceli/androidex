@@ -12,12 +12,12 @@ class Main(object):
 		self.androidexPath = os.path.join(self.rootPath, 'androidex')
 		
 		self.softLinkList = (
-			(os.path.join(self.scriptPath, 'IHAService.aidl'),
-				os.path.join(self.androidScPath, 'frameworks', 'base', 'core', 'java', 'android', 'os', 'IHAService.aidl')
-				),
-			(os.path.join(self.scriptPath, 'HAService.java'),
-				os.path.join(self.androidScPath, 'frameworks', 'base', 'services', 'java', 'com', 'android', 'server', 'HAService.java')
-				),
+			# (os.path.join(self.scriptPath, 'IHAService.aidl'),
+			# 	os.path.join(self.androidScPath, 'frameworks', 'base', 'core', 'java', 'android', 'os', 'IHAService.aidl')
+			# 	),
+			# (os.path.join(self.scriptPath, 'HAService.java'),
+			# 	os.path.join(self.androidScPath, 'frameworks', 'base', 'services', 'java', 'com', 'android', 'server', 'HAService.java')
+			# 	),
 			(os.path.join(self.scriptPath, 'com_android_server_HAService.cpp'),
 				os.path.join(self.androidScPath, 'frameworks', 'base', 'services', 'core', 'jni', 'com_android_server_HAService.cpp')
 				),
