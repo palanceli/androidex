@@ -15,6 +15,7 @@ namespace android
 {
 	// 设置虚拟硬件设备ha的寄存器的值
 	static void ha_setValue(JNIEnv* env, jobject clazz, jint ptr, jint value){
+		return ;
 		// 将参数ptr转换为ha_device_t 结构体变量
 		ha_device_t* device = (ha_device_t*)ptr;
 		if(!device){
@@ -28,6 +29,7 @@ namespace android
 
 	// 读取虚拟硬件设备HA的寄存器值
 	static jint ha_getValue(JNIEnv* env, jobject clazz, jint ptr){
+		return 0;
 		// 将参数ptr转换为ha_device_t 结构体变量
 		ha_device_t* device = (ha_device_t*)ptr;
 		if(!device){
@@ -50,6 +52,7 @@ namespace android
 
 	// 初始化虚拟硬件设备ha
 	static jint ha_init(JNIEnv* env, jclass clazz){
+		return 0;
 		ha_module_t* module;
 		ha_device_t* device;
 
@@ -74,15 +77,19 @@ namespace android
 	}
 
 	// JAVA本地接口方法表
-	static const JNINativeMethod method_table[] = {
-		{"init_native", "()I", (void*)ha_init},
-		{"setValue_native", "(II)V", (void*)ha_setValue},
-		{"getValue_native", "(I)I", (void*)ha_getValue},
+	// static const JNINativeMethod method_table[] = {
+	// 	// {"init_native", 	"()I", 		(void*)ha_init},
+	// 	// {"setValue_native", "(II)V", 	(void*)ha_setValue},
+	// 	// {"getValue_native", "(I)I", 	(void*)ha_getValue},
+	// };
+
+	static JNINativeMethod method_table[] = {
 	};
 
 	// 注册Java本地接口方法
-	int register_android_server_HAService(JNIEnv* env){
-		return jniRegisterNativeMethods(env, "com/android/server/HAService", 
-			method_table, NELEM(method_table));
+	int register_android_server_HAService(JNIEnv *env)
+	{
+	    return jniRegisterNativeMethods(env, "com/android/server/HAService",
+	            method_table, NELEM(method_table));
 	}
 };
