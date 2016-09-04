@@ -1,0 +1,55 @@
+{
+	"folders":
+	[
+		{
+			"name" : "base/services",
+			"file_include_patterns":
+			[
+				"com_android_server_input_InputManagerService.cpp", "WindowManagerService.java", 
+				"InputManagerService.java", "SystemServer.java"
+			],
+			"folder_include_patterns":
+			[
+				"core", "java", "com", "android", "server", "jni", "input", "wm"
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/base/services"
+		},
+		{
+			"name" : "native/services",
+			"folder_include_patterns":
+			[
+				"inputflinger"
+			],
+			"file_include_patterns":
+			[
+				"InputManager.*", "InputDispatcher.*", "InputReader.*", "EventHub.*"
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/native/services"
+		},
+		{
+			"name" : "base/core",
+			"folder_include_patterns":
+			[
+				"java", "android", "view", "jni"
+			],
+			"file_include_patterns":
+			[
+				"ViewRootImpl.java", "InputChannel.java", "InputQueue.java", 
+				"android_view_InputChannel.*", "android_view_InputQueue.*"
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/base/core"
+		},
+		{
+			"name" : "native/libs",
+			"folder_include_patterns":
+			[
+				"input"
+			],
+			"file_include_patterns":
+			[
+				"InputTransport.*",
+			],
+			"path": "/Volumes/android-6.0.1_r11g/android-6.0.1_r11/frameworks/native/libs"
+		}
+	]
+}
