@@ -89,7 +89,8 @@ namespace android
 	// 注册Java本地接口方法
 	int register_android_server_HAService(JNIEnv *env)
 	{
-	    return jniRegisterNativeMethods(env, "com/android/server/HAService",
-	            method_table, NELEM(method_table));
+		return 0;
+	    // return jniRegisterNativeMethods(env, "com/android/server/HAService",
+	    //         method_table, NELEM(method_table));
 	}
 };
